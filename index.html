@@ -173,10 +173,9 @@
       }
     }
 
-    /* 次にタッチするセル：外枠は光らせない（枠線の色変更・脈打つ光は無し）。ごく淡い背景色のみ。 */
-    .cell.next-target {
-      background: var(--cell-next);
-    }
+    /* 次にタッチするセルは、他のセルと見た目を完全に同じにする（枠・背景とも変えない）。
+       上部の「次のターゲット」表示だけで案内する。 */
+    .cell.next-target { }
 
     /* 正解：タップしたセルが緑に変わり、そのまま残る（薄くしすぎず、押したことが分かる） */
     .cell.hit {
@@ -591,11 +590,11 @@
     document.getElementById('start-btn').textContent = '進行中…';
     document.getElementById('start-btn').disabled = true;
 
+    running = true; // 「次のターゲット」を開始直後から表示するため、表示更新より先に立てる
     updateBestDisplay();
     highlightNext();
     updateNextDisplay();
 
-    running = true;
     startTime = performance.now();
     timerInterval = setInterval(tickTimer, 50);
   }
